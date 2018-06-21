@@ -54,8 +54,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Set the view’s delegate
         sceneView.delegate = self
+        
         // Create a new scene
         let scene = SCNScene()
         let box = SCNBox(width: 0.15, height: 0.15, length: 0.15, chamferRadius: 0)
