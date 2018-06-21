@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C141D0A820DC2A620026E21D /* SliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141D0A720DC2A620026E21D /* SliderController.swift */; };
 		C1BBD49020DB3A250076AA33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BBD48F20DB3A250076AA33 /* AppDelegate.swift */; };
 		C1BBD49420DB3A250076AA33 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BBD49320DB3A250076AA33 /* ViewController.swift */; };
 		C1BBD49720DB3A250076AA33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1BBD49520DB3A250076AA33 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C141D0A720DC2A620026E21D /* SliderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderController.swift; sourceTree = "<group>"; };
 		C1BBD48C20DB3A250076AA33 /* AR Beauty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AR Beauty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1BBD48F20DB3A250076AA33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1BBD49320DB3A250076AA33 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			children = (
 				C1BBD48F20DB3A250076AA33 /* AppDelegate.swift */,
 				C1BBD49320DB3A250076AA33 /* ViewController.swift */,
+				C141D0A720DC2A620026E21D /* SliderController.swift */,
 				C1BBD49520DB3A250076AA33 /* Main.storyboard */,
 				C1BBD49A20DB3A270076AA33 /* LaunchScreen.storyboard */,
 				C1BBD49D20DB3A270076AA33 /* Info.plist */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1BBD49420DB3A250076AA33 /* ViewController.swift in Sources */,
+				C141D0A820DC2A620026E21D /* SliderController.swift in Sources */,
 				C1BBD49020DB3A250076AA33 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

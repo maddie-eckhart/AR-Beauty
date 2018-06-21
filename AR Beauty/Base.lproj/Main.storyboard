@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="Kab-nm-yvl">
             <objects>
-                <viewController id="pgm-Py-hjg" customClass="ViewController" customModule="ARKitBasics" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pgm-Py-hjg" customClass="ViewController" customModule="AR_Beauty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TLj-E5-v6b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,6 +55,13 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.25" minValue="0.0" maxValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eGp-OD-hiL">
+                                <rect key="frame" x="13" y="559" width="347" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="slSize:" destination="pgm-Py-hjg" eventType="valueChanged" id="RdU-i8-IRn"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -71,12 +78,13 @@
                         <outlet property="sceneView" destination="TZS-Vs-XmC" id="yty-jL-im5"/>
                         <outlet property="sessionInfoLabel" destination="aU1-Ih-0bo" id="fKv-Pg-x1O"/>
                         <outlet property="sessionInfoView" destination="p59-ye-C7Z" id="urT-zP-3Gs"/>
+                        <outlet property="slValue" destination="eGp-OD-hiL" id="Trh-PV-ZKp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sIA-45-X2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="Vic-vO-fpB" customClass="SCNScene"/>
             </objects>
-            <point key="canvasLocation" x="238" y="-57"/>
+            <point key="canvasLocation" x="237.59999999999999" y="-57.121439280359823"/>
         </scene>
     </scenes>
 </document>
