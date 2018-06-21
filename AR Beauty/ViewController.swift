@@ -16,14 +16,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
     @IBOutlet weak var sessionInfoLabel: UILabel!
     @IBOutlet var sceneView: ARSCNView!
     
+    // Sizing slider
     var newSize:Float = 0.15
-
     @IBOutlet weak var slValue: UISlider!
-    
     @IBAction func slSize(_ sender: Any) {
         newSize = slValue.value
         viewDidLoad()
     }
+    
+    // Animate switch
+    var animate:Bool = false
+    @IBOutlet weak var swValue: UISwitch!
+    @IBAction func swAnimate(_ sender: Any) {
+        animate = swValue.isOn
+        viewDidLoad()
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -56,28 +64,52 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
         
         // Show debug UI to view performance metrics (e.g. frames per second).
         sceneView.showsStatistics = true
+        
+        // Turning off session update
+        sessionInfoView.isHidden = true
+        sessionInfoLabel.isHidden = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addBox()
+    }
+    
+    func addBox() {
         // Set the view’s delegate
         sceneView.delegate = self
-
+        
         // Create a new scene
         let scene = SCNScene()
         let box = SCNBox(width: CGFloat(newSize), height: CGFloat(newSize), length: CGFloat(newSize), chamferRadius: 0)
-
+        
         //applying texture
         let material = SCNMaterial()
         material.diffuse.contents = UIImage(named: "wooden_box.jpg")
         box.materials = [material]
-
+        
         let boxNode = SCNNode(geometry: box)
         boxNode.position = SCNVector3(0,0,-0.5)
         scene.rootNode.addChildNode(boxNode)
+        
         // Set the scene to the view
         sceneView.scene = scene
+        addAnimation(node: boxNode)
+
+    }
+    
+    func addAnimation(node: SCNNode) {
+        let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
+        let repeatForever = SCNAction.repeatForever(rotateOne)
+        let repeats = SCNAction.repeat(rotateOne, count: 200)
+        let stop = SCNAction.rotateBy(x: 0, y: 0, z: 0, duration: 0)
+        if animate == true {
+            print("animate on")
+            node.runAction(repeats)
+        }else{
+            print("animate off")
+            node.runAction(stop)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -90,7 +122,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
+    private func resetTracking() {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
+    
+////////////////////////////////////////////////////////////////// DETECTING PLANES AND UPDATING AR SESSION LABEL
     // MARK: - ARSCNViewDelegate
     
     /* PlaceARContent
@@ -115,8 +154,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
         node.addChildNode(planeNode)
         
     }
-    */
-    // UpdateARContent
+ */
+ 
+    /* UpdateARContent
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         // Update content only for plane anchors and nodes matching the setup created in `renderer(_:didAdd:for:)`.
         guard let planeAnchor = anchor as?  ARPlaneAnchor,
@@ -206,11 +246,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
         sessionInfoLabel.text = message
         sessionInfoView.isHidden = message.isEmpty
     }
+     */
     
-    private func resetTracking() {
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-    }
+
 
 }
