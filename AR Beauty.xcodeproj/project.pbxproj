@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C141D0AA20DC3DA50026E21D /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141D0A920DC3DA50026E21D /* ProductCollectionViewCell.swift */; };
+		C141D0AC20DC3FD20026E21D /* ProductCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141D0AB20DC3FD20026E21D /* ProductCollectionViewController.swift */; };
 		C1BBD49020DB3A250076AA33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BBD48F20DB3A250076AA33 /* AppDelegate.swift */; };
 		C1BBD49420DB3A250076AA33 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BBD49320DB3A250076AA33 /* ViewController.swift */; };
 		C1BBD49720DB3A250076AA33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1BBD49520DB3A250076AA33 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		C141D0A920DC3DA50026E21D /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		C141D0AB20DC3FD20026E21D /* ProductCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewController.swift; sourceTree = "<group>"; };
 		C1BBD48C20DB3A250076AA33 /* AR Beauty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AR Beauty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1BBD48F20DB3A250076AA33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1BBD49320DB3A250076AA33 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				C1BBD48F20DB3A250076AA33 /* AppDelegate.swift */,
 				C141D0A920DC3DA50026E21D /* ProductCollectionViewCell.swift */,
+				C141D0AB20DC3FD20026E21D /* ProductCollectionViewController.swift */,
 				C1BBD49320DB3A250076AA33 /* ViewController.swift */,
 				C1BBD49520DB3A250076AA33 /* Main.storyboard */,
 				C1BBD49A20DB3A270076AA33 /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C141D0AC20DC3FD20026E21D /* ProductCollectionViewController.swift in Sources */,
 				C1BBD49420DB3A250076AA33 /* ViewController.swift in Sources */,
 				C141D0AA20DC3DA50026E21D /* ProductCollectionViewCell.swift in Sources */,
 				C1BBD49020DB3A250076AA33 /* AppDelegate.swift in Sources */,

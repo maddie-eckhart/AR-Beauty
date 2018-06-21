@@ -10,7 +10,7 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet weak var sessionInfoView: UIView!
     @IBOutlet weak var sessionInfoLabel: UILabel!
@@ -101,13 +101,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
     func addAnimation(node: SCNNode) {
         let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
         let repeatForever = SCNAction.repeatForever(rotateOne)
-        let repeats = SCNAction.repeat(rotateOne, count: 200)
         let stop = SCNAction.rotateBy(x: 0, y: 0, z: 0, duration: 0)
         if animate == true {
-            print("animate on")
-            node.runAction(repeats)
+            node.runAction(repeatForever)
         }else{
-            print("animate off")
             node.runAction(stop)
         }
     }
