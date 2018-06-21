@@ -13,7 +13,6 @@
 		C1BBD49920DB3A260076AA33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1BBD49820DB3A260076AA33 /* Assets.xcassets */; };
 		C1BBD49C20DB3A270076AA33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1BBD49A20DB3A270076AA33 /* LaunchScreen.storyboard */; };
 		C1BBD4A520DB41460076AA33 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C1BBD4A420DB41460076AA33 /* README.md */; };
-		C1BBD4A720DB417B0076AA33 /* BuildingYourFirstARExperience in Resources */ = {isa = PBXBuildFile; fileRef = C1BBD4A620DB417B0076AA33 /* BuildingYourFirstARExperience */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +25,6 @@
 		C1BBD49D20DB3A270076AA33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1BBD4A320DB3F950076AA33 /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
 		C1BBD4A420DB41460076AA33 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		C1BBD4A620DB417B0076AA33 /* BuildingYourFirstARExperience */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BuildingYourFirstARExperience; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +44,6 @@
 				C1BBD4A420DB41460076AA33 /* README.md */,
 				C1BBD48E20DB3A250076AA33 /* AR Beauty */,
 				C1BBD48D20DB3A250076AA33 /* Products */,
-				C1BBD4A620DB417B0076AA33 /* BuildingYourFirstARExperience */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,7 +129,6 @@
 			files = (
 				C1BBD49C20DB3A270076AA33 /* LaunchScreen.storyboard in Resources */,
 				C1BBD49920DB3A260076AA33 /* Assets.xcassets in Resources */,
-				C1BBD4A720DB417B0076AA33 /* BuildingYourFirstARExperience in Resources */,
 				C1BBD4A520DB41460076AA33 /* README.md in Resources */,
 				C1BBD49720DB3A250076AA33 /* Main.storyboard in Resources */,
 			);

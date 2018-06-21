@@ -34,6 +34,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
             """) // For details, see https://developer.apple.com/documentation/arkit
         }
         
+        
         // Start the view's AR session with a configuration that uses the rear camera,
         // device position and orientation tracking, and plane detection.
         let configuration = ARWorldTrackingConfiguration()
@@ -49,6 +50,26 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
         
         // Show debug UI to view performance metrics (e.g. frames per second).
         sceneView.showsStatistics = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Set the view’s delegate
+        sceneView.delegate = self
+        // Create a new scene
+        let scene = SCNScene()
+        let box = SCNBox(width: 0.15, height: 0.15, length: 0.15, chamferRadius: 0)
+        
+        //applying texture
+        let material = SCNMaterial()
+        material.diffuse.contents = UIImage(named: "wooden_box.jpg")
+        box.materials = [material]
+        
+        let boxNode = SCNNode(geometry: box)
+        boxNode.position = SCNVector3(0,0,-0.5)
+        scene.rootNode.addChildNode(boxNode)
+        // Set the scene to the view
+        sceneView.scene = scene
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -86,6 +107,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
         // changes in the plane anchor as plane estimation continues.
         node.addChildNode(planeNode)
     }
+    
     /// - Tag: UpdateARContent
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         // Update content only for plane anchors and nodes matching the setup created in `renderer(_:didAdd:for:)`.
@@ -100,6 +122,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate  {
         // Plane estimation may also extend planes, or remove one plane to merge its extent into another.
         plane.width = CGFloat(planeAnchor.extent.x)
         plane.height = CGFloat(planeAnchor.extent.z)
+        
+        // Add cube
+//        let cubeNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
+//        cubeNode.position = SCNVector3(0, 0, -0.2) // SceneKit/AR coordinates are in meters
+//
+//        sceneView.scene.rootNode.addChildNode(cubeNode)
     }
     
     // MARK: - ARSessionDelegate
