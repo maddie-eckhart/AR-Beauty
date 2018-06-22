@@ -13,7 +13,8 @@ private let reuseIdentifier = "cell"
 class ProductCollectionViewController: UICollectionViewController {
 
     let products: [UIImage] = [UIImage(named: "wooden_box")!]
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

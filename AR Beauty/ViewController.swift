@@ -10,11 +10,14 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var sessionInfoView: UIView!
     @IBOutlet weak var sessionInfoLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+
     @IBOutlet var sceneView: ARSCNView!
+    let products: [UIImage] = [UIImage(named: "wooden_box")!]
     
     // Sizing slider
     var newSize:Float = 0.15
@@ -72,7 +75,26 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         addBox()
+    }
+    
+    func addGlobe() {
+        // Set the view’s delegate
+        sceneView.delegate = self
+        
+        // Create a new scene
+        let scene = SCNScene()
+        let globe = SCNSphere(radius: CGFloat(newSize))
+        
+        //applying texture
+        let material = SCNMaterial()
+        material.diffuse.contents = UIImage(named: "wooden_box.jpg")
+        globe.materials = [material]
+        
+        let globeNode = SCNNode(geometry: globe)
+        globeNode.position = SCNVector3(0,0,-0.5)
+        scene.rootNode.addChildNode(globeNode)
     }
     
     func addBox() {
@@ -89,7 +111,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         box.materials = [material]
         
         let boxNode = SCNNode(geometry: box)
-        boxNode.position = SCNVector3(0,0,-0.5)
+        boxNode.position = SCNVector3(0,0,-1)
         scene.rootNode.addChildNode(boxNode)
         
         // Set the scene to the view
@@ -124,6 +146,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
         sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("*******************",products.count)
+        return products.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
+        let image = products[indexPath.row]
+        cell.imageView.image = image
+        print("********************trying to fill")
+        return cell
     }
     
 ////////////////////////////////////////////////////////////////// DETECTING PLANES AND UPDATING AR SESSION LABEL
@@ -244,6 +285,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sessionInfoView.isHidden = message.isEmpty
     }
      */
+    
+    
+
+    
+    
+    
+    
     
 
 
