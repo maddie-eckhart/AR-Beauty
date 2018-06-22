@@ -17,7 +17,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     @IBOutlet weak var collectionView: UICollectionView!
 
     @IBOutlet var sceneView: ARSCNView!
-    
+    var skin: UIImage = UIImage(named: "wooden_box.jpg")!
     
     // Sizing slider
     var newSize:Float = 0.15
@@ -88,14 +88,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         
         //applying texture
         let material = SCNMaterial()
-        //material.diffuse.contents = UIImage(named: "wooden_box.jpg")
-        material.diffuse.contents = UIColor.red
-
+        material.diffuse.contents = UIImage(named: "grass.jpg")
         globe.materials = [material]
         
         let globeNode = SCNNode(geometry: globe)
         globeNode.position = SCNVector3(0,0,-0.5)
         scene.rootNode.addChildNode(globeNode)
+        sceneView.scene = scene
         addAnimation(node: globeNode)
         
     }
@@ -110,7 +109,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
         //applying texture
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "grass.jpg")
+        material.diffuse.contents = skin
         box.materials = [material]
 
         let boxNode = SCNNode(geometry: box)
@@ -135,7 +134,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
     
     // Product Collection View
-    let products: [UIImage] = [UIImage(named: "wooden_box")!,UIImage(named: "rubix_cube")!,UIImage(named: "grass")!]
+    let products: [UIImage] = [UIImage(named: "wooden_box")!,UIImage(named: "rubix_cube")!,UIImage(named: "grass")!,UIImage(named: "question_block")!, UIImage(named: "yellow")!]
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -151,6 +150,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         let image = products[indexPath.row]
         cell.imageView.image = image
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        skin = products[indexPath.row]
+        viewDidLoad()
     }
     
     private func resetTracking() {
