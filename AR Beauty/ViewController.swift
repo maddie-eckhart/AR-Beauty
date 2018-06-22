@@ -17,7 +17,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     @IBOutlet weak var collectionView: UICollectionView!
 
     @IBOutlet var sceneView: ARSCNView!
-    let products: [UIImage] = [UIImage(named: "wooden_box")!]
+    
     
     // Sizing slider
     var newSize:Float = 0.15
@@ -52,8 +52,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         }
         
         
-        // Start the view's AR session with a configuration that uses the rear camera,
-        // device position and orientation tracking, and plane detection.
+        // Start the view's AR session with a configuration that uses the rear camera,device position and orientation tracking, and plane detection.
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.horizontal, .vertical]
         sceneView.session.run(configuration)
@@ -61,8 +60,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         // Set a delegate to track the number of plane anchors for providing UI feedback.
         sceneView.session.delegate = self
         
-        // Prevent the screen from being dimmed after a while as users will likely
-        // have long periods of interaction without touching the screen or buttons.
+        // Prevent the screen from being dimmed after a while
         UIApplication.shared.isIdleTimerDisabled = true
         
         // Show debug UI to view performance metrics (e.g. frames per second).
@@ -75,8 +73,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         addBox()
+        //addGlobe()
+
     }
     
     func addGlobe() {
@@ -89,37 +88,41 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         
         //applying texture
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "wooden_box.jpg")
+        //material.diffuse.contents = UIImage(named: "wooden_box.jpg")
+        material.diffuse.contents = UIColor.red
+
         globe.materials = [material]
         
         let globeNode = SCNNode(geometry: globe)
         globeNode.position = SCNVector3(0,0,-0.5)
         scene.rootNode.addChildNode(globeNode)
+        addAnimation(node: globeNode)
+        
     }
     
     func addBox() {
         // Set the view’s delegate
         sceneView.delegate = self
-        
+
         // Create a new scene
         let scene = SCNScene()
         let box = SCNBox(width: CGFloat(newSize), height: CGFloat(newSize), length: CGFloat(newSize), chamferRadius: 0)
-        
+
         //applying texture
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "wooden_box.jpg")
+        material.diffuse.contents = UIImage(named: "grass.jpg")
         box.materials = [material]
-        
+
         let boxNode = SCNNode(geometry: box)
-        boxNode.position = SCNVector3(0,0,-1)
+        boxNode.position = SCNVector3(0,0,-0.5)
         scene.rootNode.addChildNode(boxNode)
-        
+
         // Set the scene to the view
         sceneView.scene = scene
         addAnimation(node: boxNode)
 
     }
-    
+
     func addAnimation(node: SCNNode) {
         let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
         let repeatForever = SCNAction.repeatForever(rotateOne)
@@ -129,6 +132,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         }else{
             node.runAction(stop)
         }
+    }
+    
+    // Product Collection View
+    let products: [UIImage] = [UIImage(named: "wooden_box")!,UIImage(named: "rubix_cube")!,UIImage(named: "grass")!]
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return products.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
+        let image = products[indexPath.row]
+        cell.imageView.image = image
+        return cell
+    }
+    
+    private func resetTracking() {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -141,32 +169,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    private func resetTracking() {
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("*******************",products.count)
-        return products.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
-        let image = products[indexPath.row]
-        cell.imageView.image = image
-        print("********************trying to fill")
-        return cell
-    }
-    
 ////////////////////////////////////////////////////////////////// DETECTING PLANES AND UPDATING AR SESSION LABEL
     // MARK: - ARSCNViewDelegate
     
