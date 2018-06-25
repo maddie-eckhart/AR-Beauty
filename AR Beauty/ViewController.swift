@@ -18,6 +18,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     @IBOutlet var sceneView: ARSCNView!
     var skin: UIImage = UIImage(named: "wooden_box.jpg")!
+    var shapeToAdd: Int = 1
     
     // Sizing slider
     var newSize:Float = 0.15
@@ -73,9 +74,26 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addBox()
-        //addGlobe()
-
+        switch shapeToAdd {
+        case 1:
+            addBox()
+        case 2:
+            addGlobe()
+        default:
+            return
+        }
+    }
+    
+    func loadShape(newSkin: UIImage, shape: Int) {
+        skin = newSkin
+        switch shape {
+        case 1:
+            shapeToAdd = 1
+        case 2:
+            shapeToAdd = 2
+        default:
+            return
+        }
     }
     
     func addGlobe() {
@@ -88,7 +106,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         
         //applying texture
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "grass.jpg")
+        material.diffuse.contents = skin
         globe.materials = [material]
         
         let globeNode = SCNNode(geometry: globe)
@@ -134,9 +152,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
     
     // Product Collection View
-    let products: [UIImage] = [UIImage(named: "wooden_box")!,UIImage(named: "rubix_cube")!,UIImage(named: "grass")!,UIImage(named: "question_block")!, UIImage(named: "yellow")!]
+    var products: [ProductList] = []
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
+        let cube: ProductList = ProductList(newName: "box", newType: 1, newImage: UIImage(named: "wooden_box")!)
+        let globe: ProductList = ProductList(newName: "globe", newType: 2, newImage: UIImage(named: "earth")!)
+        products.append(cube)
+        products.append(globe)
         return 1
     }
     
@@ -147,13 +169,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
-        let image = products[indexPath.row]
+        let image = products[indexPath.row].image
         cell.imageView.image = image
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        skin = products[indexPath.row]
+        loadShape(newSkin: products[indexPath.row].image, shape: products[indexPath.row].type)
         viewDidLoad()
     }
     

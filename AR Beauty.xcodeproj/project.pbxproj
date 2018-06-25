@@ -14,6 +14,7 @@
 		C1BBD49920DB3A260076AA33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1BBD49820DB3A260076AA33 /* Assets.xcassets */; };
 		C1BBD49C20DB3A270076AA33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1BBD49A20DB3A270076AA33 /* LaunchScreen.storyboard */; };
 		C1BBD4A520DB41460076AA33 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C1BBD4A420DB41460076AA33 /* README.md */; };
+		C1F7192A20E1283500A2E389 /* ProductList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F7192920E1283500A2E389 /* ProductList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		C1BBD49D20DB3A270076AA33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1BBD4A320DB3F950076AA33 /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
 		C1BBD4A420DB41460076AA33 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C1F7192920E1283500A2E389 /* ProductList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				C1BBD48F20DB3A250076AA33 /* AppDelegate.swift */,
 				C141D0A920DC3DA50026E21D /* ProductCollectionViewCell.swift */,
+				C1F7192920E1283500A2E389 /* ProductList.swift */,
 				C1BBD49320DB3A250076AA33 /* ViewController.swift */,
 				C1BBD49520DB3A250076AA33 /* Main.storyboard */,
 				C1BBD49A20DB3A270076AA33 /* LaunchScreen.storyboard */,
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1BBD49420DB3A250076AA33 /* ViewController.swift in Sources */,
+				C1F7192A20E1283500A2E389 /* ProductList.swift in Sources */,
 				C141D0AA20DC3DA50026E21D /* ProductCollectionViewCell.swift in Sources */,
 				C1BBD49020DB3A250076AA33 /* AppDelegate.swift in Sources */,
 			);
