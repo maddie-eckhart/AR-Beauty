@@ -73,6 +73,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
     
     override func viewDidLoad() {
+        //addFromBlender()
+
         super.viewDidLoad()
         switch shapeToAdd {
         case 1:
@@ -82,6 +84,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         default:
             return
         }
+
     }
     
     func loadShape(newSkin: UIImage, shape: Int) {
@@ -94,6 +97,30 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         default:
             return
         }
+    }
+    
+    func addFromBlender() {
+        // Set the view’s delegate
+        sceneView.delegate = self
+        
+        // Create a new scene
+        // let scene = SCNScene(named: "Assets.scnassets/cylinder.dae")
+        
+        let scene = SCNScene(named: "cylinder.scn")!
+//        if (scene == nil) {
+//            fatalError("Scene not loaded")
+//        }
+//
+//        var playerNode = scene!.rootNode.childNode(withName: "Cylinder", recursively: true)
+//        if (playerNode == nil) {
+//            fatalError("Ship node not found")
+//        }
+//
+//        playerNode!.scale = SCNVector3(x: 0.25, y: 0.25, z: 0.25)
+//
+//        scene?.rootNode.addChildNode(playerNode!)
+        sceneView.scene = scene
+
     }
     
     func addGlobe() {

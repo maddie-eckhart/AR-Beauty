@@ -26,7 +26,7 @@
 		C1BBD49820DB3A260076AA33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1BBD49B20DB3A270076AA33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1BBD49D20DB3A270076AA33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C1BBD4A320DB3F950076AA33 /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
+		C1BBD4A320DB3F950076AA33 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		C1BBD4A420DB41460076AA33 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C1F7192920E1283500A2E389 /* ProductList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,7 +69,7 @@
 				C1BBD49520DB3A250076AA33 /* Main.storyboard */,
 				C1BBD49A20DB3A270076AA33 /* LaunchScreen.storyboard */,
 				C1BBD49D20DB3A270076AA33 /* Info.plist */,
-				C1BBD4A320DB3F950076AA33 /* Assets.scnassets */,
+				C1BBD4A320DB3F950076AA33 /* art.scnassets */,
 				C1BBD49820DB3A260076AA33 /* Assets.xcassets */,
 			);
 			path = "AR Beauty";
