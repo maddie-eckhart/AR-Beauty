@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+// maybe add in a .scn as an attribute too??????
 
 class ProductList {
     var name: String = ""
