@@ -17,6 +17,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     @IBOutlet weak var collectionView: UICollectionView!
 
     @IBOutlet var sceneView: ARSCNView!
+    
     var skin: UIImage = UIImage(named: "wooden_box.jpg")!
     var shapeToAdd: Int = 1
     
@@ -73,18 +74,34 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
     
     override func viewDidLoad() {
-        addFromBlender()
+         super.viewDidLoad()
+        //addFromBlender()
+        sceneView.delegate = self
+        sceneView.showsStatistics = true
+        
+        // Create a new scene
+        let scene = SCNScene()
+        sceneView.scene = scene
+       
+        switch shapeToAdd {
+        case 1:
+            addBox()
+        case 2:
+            addGlobe()
+        default:
+            return
+        }
 
-        super.viewDidLoad()
-//        switch shapeToAdd {
-//        case 1:
-//            addBox()
-//        case 2:
-//            addGlobe()
-//        default:
-//            return
-//        }
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Create a session configuration
+        let configuration = ARWorldTrackingConfiguration()
+        
+        // Run the view's session
+        sceneView.session.run(configuration)
     }
     
     func loadShape(newSkin: UIImage, shape: Int) {
@@ -154,9 +171,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         let box = SCNBox(width: CGFloat(newSize), height: CGFloat(newSize), length: CGFloat(newSize), chamferRadius: 0)
 
         //applying texture
-        let material = SCNMaterial()
-        material.diffuse.contents = skin
-        box.materials = [material]
+        let material1 = SCNMaterial()
+        let skin1 = UIImage(named: "front")
+        material1.diffuse.contents = skin1
+        let material2 = SCNMaterial()
+        let skin2 = UIImage(named: "side1")
+        material2.diffuse.contents = skin2
+        let material3 = SCNMaterial()
+        let skin3 = UIImage(named: "back")
+        material3.diffuse.contents = skin3
+        let material4 = SCNMaterial()
+        let skin4 = UIImage(named: "side2")
+        material4.diffuse.contents = skin4
+        let material5 = SCNMaterial()
+        let skin5 = UIImage(named: "top")
+        material5.diffuse.contents = skin5
+        let material6 = SCNMaterial()
+        let skin6 = UIImage(named: "bottom")
+        material6.diffuse.contents = skin6
+        box.materials = [material1, material2, material3, material4, material5, material6]
 
         let boxNode = SCNNode(geometry: box)
         boxNode.position = SCNVector3(0,0,-0.5)
@@ -183,6 +216,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     var products: [ProductList] = []
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // list of products
         let cube: ProductList = ProductList(newName: "box", newType: 1, newImage: UIImage(named: "wooden_box")!)
         let globe: ProductList = ProductList(newName: "globe", newType: 2, newImage: UIImage(named: "earth")!)
         products.append(cube)
