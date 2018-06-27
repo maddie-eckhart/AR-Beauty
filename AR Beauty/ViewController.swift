@@ -19,6 +19,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     @IBOutlet var sceneView: ARSCNView!
     
     var skin: UIImage = UIImage(named: "wooden_box.jpg")!
+    var nodeModel: SCNNode?
     var shapeToAdd: Int = 1
     
     // Sizing slider
@@ -75,7 +76,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     
     override func viewDidLoad() {
          super.viewDidLoad()
-        //addFromBlender()
+
         sceneView.delegate = self
         sceneView.showsStatistics = true
         
@@ -83,11 +84,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         let scene = SCNScene()
         sceneView.scene = scene
        
+        if let modelScene = SCNScene(named:"cylinder.scn") {
+            nodeModel =  modelScene.rootNode.childNode(withName: "cylinder", recursively: true)
+        }
+        else
+        {
+            print("can't load model at viewDidLoad")
+        }
         switch shapeToAdd {
         case 1:
             addBox()
         case 2:
             addGlobe()
+        case 3:
+            addFromBlender()
         default:
             return
         }
@@ -111,6 +121,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             shapeToAdd = 1
         case 2:
             shapeToAdd = 2
+        case 3:
+            shapeToAdd = 3
         default:
             return
         }
@@ -121,23 +133,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         sceneView.delegate = self
         
         // Create a new scene
-        // let scene = SCNScene(named: "Assets.scnassets/cylinder.dae")
-        
-        let scene = SCNScene(named: "cylinder.scn")!
-        let nodeModel: SCNNode = scene.rootNode.childNode(withName: "cylinder", recursively: true)!
-//        if (scene == nil) {
-//            fatalError("Scene not loaded")
-//        }
-//
-//        var playerNode = scene!.rootNode.childNode(withName: "Cylinder", recursively: true)
-//        if (playerNode == nil) {
-//            fatalError("Ship node not found")
-//        }
-//
-//        playerNode!.scale = SCNVector3(x: 0.25, y: 0.25, z: 0.25)
-//
-//        scene?.rootNode.addChildNode(playerNode!)
-
+        if let modelScene = SCNScene(named:"cylinder.scn") {
+            self.nodeModel =  modelScene.rootNode.childNode(withName: "cylinder", recursively: true)
+        }
+        else {
+            print("can't load model in func")
+        }
 
     }
     
@@ -219,8 +220,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         // list of products
         let cube: ProductList = ProductList(newName: "box", newType: 1, newImage: UIImage(named: "wooden_box")!)
         let globe: ProductList = ProductList(newName: "globe", newType: 2, newImage: UIImage(named: "earth")!)
+        let cylinder: ProductList = ProductList(newName: "cylinder", newType: 3, newImage: UIImage(named: "front")!)
         products.append(cube)
         products.append(globe)
+        products.append(cylinder)
         return 1
     }
     
