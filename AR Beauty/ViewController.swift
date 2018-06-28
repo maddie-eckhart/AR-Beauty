@@ -18,7 +18,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     @IBOutlet var sceneView: ARSCNView!
     
-    var skin: UIImage = UIImage(named: "wooden_box.jpg")!
+    var skin: UIImage?
     var nodeModel: SCNNode?
     var shapeToAdd: Int = 1
     
@@ -121,8 +121,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             shapeToAdd = 1
         case 2:
             shapeToAdd = 2
-        case 3:
-            shapeToAdd = 3
+//        case 3:
+//            shapeToAdd = 3
         default:
             return
         }
@@ -218,12 +218,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // list of products
-        let cube: ProductList = ProductList(newName: "box", newType: 1, newImage: UIImage(named: "wooden_box")!)
+        let cube: ProductList = ProductList(newName: "box", newType: 1, newImage: UIImage(named: "front")!)
         let globe: ProductList = ProductList(newName: "globe", newType: 2, newImage: UIImage(named: "earth")!)
-        let cylinder: ProductList = ProductList(newName: "cylinder", newType: 3, newImage: UIImage(named: "front")!)
+        //let cylinder: ProductList = ProductList(newName: "cylinder", newType: 3, newImage: UIImage(named: "front")!)
         products.append(cube)
         products.append(globe)
-        products.append(cylinder)
+        //products.append(cylinder)
         return 1
     }
     
@@ -263,31 +263,37 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 ////////////////////////////////////////////////////////////////// DETECTING PLANES AND UPDATING AR SESSION LABEL
     // MARK: - ARSCNViewDelegate
     
-    /* PlaceARContent
+    // PlaceARContent
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         // Place content only for anchors found by plane detection.
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
         
         // Create a SceneKit plane to visualize the plane anchor using its position and extent.
-        let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
+        let width = CGFloat(planeAnchor.extent.x)
+        let height = CGFloat(planeAnchor.extent.z)
+        let plane = SCNPlane(width: width, height: height)
+        
         let planeNode = SCNNode(geometry: plane)
-        planeNode.simdPosition = float3(planeAnchor.center.x, 0, planeAnchor.center.z)
+        let x = CGFloat(planeAnchor.center.x)
+        let y = CGFloat(planeAnchor.center.y)
+        let z = CGFloat(planeAnchor.center.z)
+        planeNode.position = SCNVector3(x, y, z)
+        
+        // adding color to plane
+        plane.materials.first?.diffuse.contents = UIColor.purple
+        planeNode.opacity = 0.25
         
         // `SCNPlane` is vertically oriented in its local coordinate space, so
         // rotate the plane to match the horizontal orientation of `ARPlaneAnchor`.
         planeNode.eulerAngles.x = -.pi / 2
-        
-        // Make the plane visualization semitransparent to clearly show real-world placement.
-        planeNode.opacity = 0.25
-        
+
         // Add the plane visualization to the ARKit-managed node so that it tracks
         // changes in the plane anchor as plane estimation continues.
         node.addChildNode(planeNode)
         
     }
- */
  
-    /* UpdateARContent
+    // UpdateARContent
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         // Update content only for plane anchors and nodes matching the setup created in `renderer(_:didAdd:for:)`.
         guard let planeAnchor = anchor as?  ARPlaneAnchor,
@@ -296,16 +302,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             else { return }
         
         // Plane estimation may shift the center of a plane relative to its anchor's transform.
-        planeNode.simdPosition = float3(planeAnchor.center.x, 0, planeAnchor.center.z)
+        let width = CGFloat(planeAnchor.extent.x)
+        let height = CGFloat(planeAnchor.extent.z)
+        plane.width = width
+        plane.height = height
         
-        // Plane estimation may also extend planes, or remove one plane to merge its extent into another.
-        plane.width = CGFloat(planeAnchor.extent.x)
-        plane.height = CGFloat(planeAnchor.extent.z)
-        // Add cube
-//        let cubeNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
-//        cubeNode.position = SCNVector3(0, 0, -0.2) // SceneKit/AR coordinates are in meters
-//
-//        sceneView.scene.rootNode.addChildNode(cubeNode)
+        let x = CGFloat(planeAnchor.center.x)
+        let y = CGFloat(planeAnchor.center.y)
+        let z = CGFloat(planeAnchor.center.z)
+        planeNode.position = SCNVector3(x, y, z)   
         
     }
     
@@ -377,7 +382,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         sessionInfoLabel.text = message
         sessionInfoView.isHidden = message.isEmpty
     }
-     */
+
     
     
 
