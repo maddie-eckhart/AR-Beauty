@@ -83,24 +83,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         // Create a new scene
         let scene = SCNScene()
         sceneView.scene = scene
-       
-        if let modelScene = SCNScene(named:"cylinder.scn") {
-            nodeModel =  modelScene.rootNode.childNode(withName: "cylinder", recursively: true)
-        }
-        else
-        {
-            print("can't load model at viewDidLoad")
-        }
-        switch shapeToAdd {
-        case 1:
-            addBox()
-        case 2:
-            addGlobe()
-        case 3:
-            addFromBlender()
-        default:
-            return
-        }
+        addTapGestureToSceneView()
+        configureLighting()
+        
+//        switch shapeToAdd {
+//        case 1:
+//            addBox()
+//        case 2:
+//            addGlobe()
+//        default:
+//            return
+//        }
 
     }
     
@@ -121,8 +114,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
             shapeToAdd = 1
         case 2:
             shapeToAdd = 2
-//        case 3:
-//            shapeToAdd = 3
         default:
             return
         }
@@ -213,6 +204,37 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         }
     }
     
+    func configureLighting() {
+        sceneView.autoenablesDefaultLighting = true
+        sceneView.automaticallyUpdatesLighting = true
+    } 
+    
+    // adding object to plane
+    @objc func addProductToSceneView(withGestureRecognizer recognizer: UIGestureRecognizer)
+    {
+        let tapLocation = recognizer.location(in: sceneView)
+        let hitTestResults = sceneView.hitTest(tapLocation, types: .existingPlane)
+        
+        guard let hitTestResult = hitTestResults.first else {return}
+        let transpose = hitTestResult.worldTransform.columns
+        let x = transpose.3.x
+        let y = transpose.3.y
+        let z = transpose.3.z
+        
+        if let modelScene = SCNScene(named: "cylinder.scn") {
+            let modelNode = modelScene.rootNode.childNode(withName: "cylinder", recursively: true)
+            modelNode?.position = SCNVector3(x, y, z)
+            sceneView.scene.rootNode.addChildNode(modelNode!)
+        }else{
+            print("cant add")
+        }
+    }
+    
+    func addTapGestureToSceneView() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.addProductToSceneView(withGestureRecognizer:)))
+        sceneView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
     // Product Collection View
     var products: [ProductList] = []
     
@@ -289,6 +311,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
         // Add the plane visualization to the ARKit-managed node so that it tracks
         // changes in the plane anchor as plane estimation continues.
+        planeNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         node.addChildNode(planeNode)
         
     }
@@ -310,12 +333,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         let x = CGFloat(planeAnchor.center.x)
         let y = CGFloat(planeAnchor.center.y)
         let z = CGFloat(planeAnchor.center.z)
-        planeNode.position = SCNVector3(x, y, z)   
+        planeNode.position = SCNVector3(x, y, z)
         
     }
     
     // MARK: - ARSessionDelegate
-    
+    /*
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
         guard let frame = session.currentFrame else { return }
         updateSessionInfoLabel(for: frame, trackingState: frame.camera.trackingState)
@@ -382,13 +405,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         sessionInfoLabel.text = message
         sessionInfoView.isHidden = message.isEmpty
     }
-
     
-    
-
-    
-    
-    
+    */
     
     
 
