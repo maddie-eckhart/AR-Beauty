@@ -3,7 +3,7 @@
 //  AR Beauty
 //
 //  Created by Madeline Eckhart on 6/20/18.
-//  Copyright © 2018 MaddGaming. All rights reserved.
+//  Copyright © 2018 MaddGaming. All rights reserved
 //
 
 import UIKit
