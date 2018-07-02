@@ -83,17 +83,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         // Create a new scene
         let scene = SCNScene()
         sceneView.scene = scene
-        addTapGestureToSceneView()
-        configureLighting()
+//        addTapGestureToSceneView()
+//        configureLighting()
         
-//        switch shapeToAdd {
-//        case 1:
-//            addBox()
-//        case 2:
-//            addGlobe()
-//        default:
-//            return
-//        }
+        switch shapeToAdd {
+        case 1:
+            addBox()
+        case 2:
+            addGlobe()
+        default:
+            return
+        }
 
     }
     
@@ -124,8 +124,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         sceneView.delegate = self
         
         // Create a new scene
-        if let modelScene = SCNScene(named:"cylinder.scn") {
-            self.nodeModel =  modelScene.rootNode.childNode(withName: "cylinder", recursively: true)
+        if let modelScene = SCNScene(named:"Test.scn") {
+            self.nodeModel =  modelScene.rootNode.childNode(withName: "pyramid", recursively: true)
         }
         else {
             print("can't load model in func")
@@ -185,6 +185,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
         let boxNode = SCNNode(geometry: box)
         boxNode.position = SCNVector3(0,0,-0.5)
+        boxNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         scene.rootNode.addChildNode(boxNode)
 
         // Set the scene to the view
@@ -209,7 +210,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         sceneView.automaticallyUpdatesLighting = true
     } 
     
-    // adding object to plane
+    /* adding object to plane
     @objc func addProductToSceneView(withGestureRecognizer recognizer: UIGestureRecognizer)
     {
         let tapLocation = recognizer.location(in: sceneView)
@@ -221,10 +222,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         let y = transpose.3.y
         let z = transpose.3.z
         
-        if let modelScene = SCNScene(named: "cylinder.scn") {
-            let modelNode = modelScene.rootNode.childNode(withName: "cylinder", recursively: true)
+        if let modelScene = SCNScene(named: "Test.scn") {
+            let modelNode = modelScene.rootNode.childNode(withName: "pyramid", recursively: true)
             modelNode?.position = SCNVector3(x, y, z)
             sceneView.scene.rootNode.addChildNode(modelNode!)
+            modelNode?.scale = SCNVector3(newSize, newSize, newSize)
         }else{
             print("cant add")
         }
@@ -234,7 +236,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.addProductToSceneView(withGestureRecognizer:)))
         sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
-    
+    */
     // Product Collection View
     var products: [ProductList] = []
     
@@ -285,7 +287,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 ////////////////////////////////////////////////////////////////// DETECTING PLANES AND UPDATING AR SESSION LABEL
     // MARK: - ARSCNViewDelegate
     
-    // PlaceARContent
+    /* PlaceARContent
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         // Place content only for anchors found by plane detection.
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
@@ -312,6 +314,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         // Add the plane visualization to the ARKit-managed node so that it tracks
         // changes in the plane anchor as plane estimation continues.
         planeNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+
         node.addChildNode(planeNode)
         
     }
@@ -333,8 +336,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         let x = CGFloat(planeAnchor.center.x)
         let y = CGFloat(planeAnchor.center.y)
         let z = CGFloat(planeAnchor.center.z)
+        planeNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         planeNode.position = SCNVector3(x, y, z)
-        
+      
     }
     
     // MARK: - ARSessionDelegate
@@ -406,9 +410,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         sessionInfoView.isHidden = message.isEmpty
     }
     
+
     */
-    
-    
+    */
 
 
 }

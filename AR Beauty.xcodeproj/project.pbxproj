@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C141D0AA20DC3DA50026E21D /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141D0A920DC3DA50026E21D /* ProductCollectionViewCell.swift */; };
+		C177033820E681E5005CDD90 /* mac_fix.scn in Resources */ = {isa = PBXBuildFile; fileRef = C177033520E68185005CDD90 /* mac_fix.scn */; };
 		C1AAA8B520E4149A0069DD04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1AAA8B420E4149A0069DD04 /* Assets.xcassets */; };
 		C1AFDE5320E58ED700FD83BB /* Test.scn in Resources */ = {isa = PBXBuildFile; fileRef = C1AFDE5220E58ECD00FD83BB /* Test.scn */; };
 		C1BBD49020DB3A250076AA33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BBD48F20DB3A250076AA33 /* AppDelegate.swift */; };
@@ -20,8 +21,7 @@
 
 /* Begin PBXFileReference section */
 		C141D0A920DC3DA50026E21D /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
-		C177033120E66E1A005CDD90 /* cone.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = cone.scn; sourceTree = "<group>"; };
-		C177033220E66E20005CDD90 /* cylinder.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = cylinder.scn; sourceTree = "<group>"; };
+		C177033520E68185005CDD90 /* mac_fix.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = mac_fix.scn; sourceTree = "<group>"; };
 		C1AAA8B420E4149A0069DD04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1AFDE5220E58ECD00FD83BB /* Test.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Test.scn; sourceTree = "<group>"; };
 		C1BBD48C20DB3A250076AA33 /* AR Beauty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AR Beauty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,8 +50,7 @@
 			isa = PBXGroup;
 			children = (
 				C1AFDE5220E58ECD00FD83BB /* Test.scn */,
-				C177033120E66E1A005CDD90 /* cone.scn */,
-				C177033220E66E20005CDD90 /* cylinder.scn */,
+				C177033520E68185005CDD90 /* mac_fix.scn */,
 				C1AAA8B420E4149A0069DD04 /* Assets.xcassets */,
 				C1BBD4A320DB3F950076AA33 /* art.scnassets */,
 			);
@@ -150,6 +149,7 @@
 			files = (
 				C1BBD49C20DB3A270076AA33 /* LaunchScreen.storyboard in Resources */,
 				C1AFDE5320E58ED700FD83BB /* Test.scn in Resources */,
+				C177033820E681E5005CDD90 /* mac_fix.scn in Resources */,
 				C1BBD4A520DB41460076AA33 /* README.md in Resources */,
 				C1AAA8B520E4149A0069DD04 /* Assets.xcassets in Resources */,
 				C1BBD49720DB3A250076AA33 /* Main.storyboard in Resources */,
