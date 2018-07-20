@@ -9,6 +9,6 @@ This first AR app shown simply places a 3D object in the space in front of the d
 
 ## Demo Mode (demo)
 
-The first branch of this project is meant to show the realistic uses of AR in the online shopping community. Once a plane had been detected by the ARKit, a 3D object will be placed on the plane in a realistic size compared to its surroundings. The user will be able to manipulate the object's size and color, depending on the product shown. This app will eventually become an environment that can be launched within a product info page within a mobile app.
+See repository "AR-Demo"
 
 
