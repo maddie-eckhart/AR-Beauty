@@ -43,27 +43,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         sceneView.delegate = self
     }
     
-    func configureLighting() {
-        sceneView.autoenablesDefaultLighting = true
-        sceneView.automaticallyUpdatesLighting = true
-        
-        //Need a directional light to cast shadows!
-        let directionalNode = SCNNode()
-        let constraint = SCNLookAtConstraint(target:nodeModel)
-        directionalNode.light = SCNLight()
-        directionalNode.light?.type = .directional
-        directionalNode.light?.color = UIColor.white
-        directionalNode.light?.castsShadow = true
-        directionalNode.light?.intensity = 2000
-        directionalNode.light?.shadowRadius = 16
-        directionalNode.light?.shadowMode = .deferred
-        directionalNode.eulerAngles = SCNVector3(Float.pi/2,0,0)
-        directionalNode.light?.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-        directionalNode.position = SCNVector3((nodeModel.position.x) + 10,(nodeModel.position.y) + 30,(nodeModel.position.z) + 30)
-        directionalNode.constraints = [constraint]
-        // Add the lights to the container
-        self.sceneView.scene.rootNode.addChildNode(directionalNode)
-    }
     
    //----------------------------------------------- View Before Loading -----------------------------------------------//
     
@@ -80,6 +59,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         
         if let modelScene = SCNScene(named:"lipstick.scn") {
             nodeModel = modelScene.rootNode.childNode(withName: nodeName, recursively: true)!
+            
             //Set the size and position of 3d object (easier to set in code vs in IB editor)
             nodeModel.pivot = SCNMatrix4MakeTranslation(0.0, 0.0, 0.0)
             nodeModel.scale = SCNVector3(0.0002, 0.0002, 0.0002)
@@ -138,8 +118,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MaterialCollectionViewCell
-        let image:UIImage = materials[indexPath.row].image
-        cell.imageView.image = image
+        cell.backgroundColor = hexStringToUIColor(hex: materials[indexPath.row].hex)
         cell.layer.cornerRadius = cell.imageView.frame.size.width / 2
         return cell
     }
@@ -320,6 +299,28 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
 
    //----------------------------------------------- Auxillary Functions -----------------------------------------------//
+    
+    func configureLighting() {
+        sceneView.autoenablesDefaultLighting = true
+        sceneView.automaticallyUpdatesLighting = true
+        
+        //Need a directional light to cast shadows!
+        let directionalNode = SCNNode()
+        let constraint = SCNLookAtConstraint(target:nodeModel)
+        directionalNode.light = SCNLight()
+        directionalNode.light?.type = .directional
+        directionalNode.light?.color = UIColor.white
+        directionalNode.light?.castsShadow = true
+        directionalNode.light?.intensity = 2000
+        directionalNode.light?.shadowRadius = 16
+        directionalNode.light?.shadowMode = .deferred
+        directionalNode.eulerAngles = SCNVector3(Float.pi/2,0,0)
+        directionalNode.light?.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        directionalNode.position = SCNVector3((nodeModel.position.x) + 10,(nodeModel.position.y) + 30,(nodeModel.position.z) + 30)
+        directionalNode.constraints = [constraint]
+        // Add the lights to the container
+        self.sceneView.scene.rootNode.addChildNode(directionalNode)
+    }
     
     @IBAction func addToCart(_ sender: Any) {
         
